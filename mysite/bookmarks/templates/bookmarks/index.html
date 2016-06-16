@@ -1,0 +1,9 @@
+{% if variable %}
+	{% for a in variable %}	
+		<p>Welcome to <b> bookmarks </b> app::   {{a.username}} </p>
+		<p>your email-id is {{a.emailid}} </p>
+		<p>your password is  ####### (lets keep it a secret)</p>
+	{% endfor %}
+	<p>Lets    <a href = "{% url 'bookmarks:login' %}">LOGIN</a></p>
+	<p>Or if u are new to our portal lets <a href = "{% url 'bookmarks:newuser' %}">SignUp</a></p>
+{% endif %}

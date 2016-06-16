@@ -1,0 +1,15 @@
+Welcome <b>{{q.username}}</b>
+<br>
+I think your email-id is <i>{{q.emailid}}</i>
+<br>
+Now i can show you your password and that is :-  {{q.password}}
+<br><br>
+What say lets change it ???     <form action = {% url "bookmarks:passwordupdate" %} method = "post">
+				{% csrf_token %}
+				<input type = "submit" value = "update">
+				</form>
+Shall we log out :   		<form action = {% url "bookmarks:login" %} method = "post">
+                                {% csrf_token %}
+                                <input type = "submit" value = "logout">
+                                </form>
+
