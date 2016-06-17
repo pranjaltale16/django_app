@@ -2,6 +2,8 @@ from django.shortcuts import render
 from . models import user
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.urlresolvers import reverse
+def redirect(request):
+	return HttpResponseRedirect(reverse('polls:index'))
 def index(request):
 	variable = user.objects.all()
 	context = {'variable' : variable}

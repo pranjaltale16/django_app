@@ -1,4 +1,4 @@
-Welcome <b>{{q.username}}</b>
+<h2 align = 'center'>Welcome <b>{{q.username}}</b></h2>
 <br>
 I think your email-id is <i>{{q.emailid}}</i>
 <br>
@@ -12,4 +12,9 @@ Shall we log out :   		<form action = {% url "bookmarks:login" %} method = "post
                                 {% csrf_token %}
                                 <input type = "submit" value = "logout">
                                 </form>
+Lets Proceed towards voting :   <form action = {% url "bookmarks:redirect" %} method = "post">
+                                {% csrf_token %}
+                                <input type = "submit" value = "Vote">
+                                </form>
+ 
 

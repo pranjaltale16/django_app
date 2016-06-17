@@ -1,9 +1,13 @@
+<h2 align = 'center'>Hello there!</h2>
+<h4><i>There we go here is a list please click on a question and proceed further</i></h4>
+<hr>
+<br>
 {% load staticfiles %}
 <link rel='stylesheet' type = "text/css" href = "{% static 'polls/style.css' %}"/>
 {% if latest_question_list %}
 	<ul>
 	{% for question in latest_question_list %}
-		<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+		<li><a href="{% url 'polls:detail' question.id %}" style = "padding:10px;">{{ question.question_text }}</a></li>
 	{% endfor %}
 	</ul>
 {% else %}
