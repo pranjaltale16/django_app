@@ -39,6 +39,22 @@ def welcome(request):
 		context = {'variable': variable}
 		return HttpResponseRedirect(reverse('bookmarks:login'))
 def passwordupdate(request):
-	return HttpResponse("yo")	
+	return render(request,'bookmarks/passwordupdate.html')
+def changepassword(request):
+	uname = request.POST['username']
+	password = request.POST['oldpassword']
+	newpass = request.POST['newpassword']
+	newpass1 = request.POST['newpassword1']
+	q = user.objects.get(username = uname)
+	if(q.password == password):
+		if(newpass == newpass1):
+			q.password = newpass
+			q.save()
+			return render(request,'bookmarks/login.html')
+	else:
+		return HttpResponse("Details does not match")
+	
+		
+		
 # Create your views here.
 

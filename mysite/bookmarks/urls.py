@@ -8,4 +8,5 @@ urlpatterns = [
 	url(r'^authenticate/$',views.authenticate , name = 'authenticate'),
 	url(r'^welcome/$',views.welcome, name = 'welcome'),
 	url(r'^passwordupdate/$',views.passwordupdate, name = 'passwordupdate'),
+	url(r'^changepassword/$',views.changepassword, name = 'changepassword'),
 ]
