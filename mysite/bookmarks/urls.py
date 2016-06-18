@@ -10,4 +10,5 @@ urlpatterns = [
 	url(r'^passwordupdate/$',views.passwordupdate, name = 'passwordupdate'),
 	url(r'^changepassword/$',views.changepassword, name = 'changepassword'),
 	url(r'^redirect/$', views.redirect, name = 'redirect'),
+	url(r'^logout/$',views.logout,name = 'logout'),
 ]

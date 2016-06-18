@@ -34,6 +34,7 @@ def authenticate(request):
 def welcome(request):
 	q = user.objects.get(username = request.POST['username'])
 	if(q.password == request.POST['password']):
+		request.session['username'] = q.username
 		context = {'q':q}
 		return render(request,'bookmarks/welcome.html',context)
 	else:
@@ -52,10 +53,12 @@ def changepassword(request):
 		if(newpass == newpass1):
 			q.password = newpass
 			q.save()
-			return render(request,'bookmarks/login.html')
+			return render(request,'bookmarks/index.html')
 	else:
 		return HttpResponse("Details does not match")
-	
+def logout(request):
+	del request.session['username']
+	return HttpResponseRedirect(reverse('bookmarks:index'))	
 		
 		
 # Create your views here.

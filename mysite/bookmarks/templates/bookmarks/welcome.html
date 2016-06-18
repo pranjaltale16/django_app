@@ -8,7 +8,7 @@ What say lets change it ???     <form action = {% url "bookmarks:passwordupdate"
 				{% csrf_token %}
 				<input type = "submit" value = "update">
 				</form>
-Shall we log out :   		<form action = {% url "bookmarks:login" %} method = "post">
+Shall we log out :   		<form action = {% url "bookmarks:logout" %} method = "post">
                                 {% csrf_token %}
                                 <input type = "submit" value = "logout">
                                 </form>
