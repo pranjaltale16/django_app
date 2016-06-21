@@ -18,18 +18,28 @@ def newuser(request):
 	context = {'variable':variable}
 	return render(request, 'bookmarks/new_user.html',context)
 def authenticate(request):
-	uname = request.POST['username']
-	email = request.POST['emailid']
-	passwrd = request.POST['password']
-	passwrd1 = request.POST['password1']
-	if(passwrd != passwrd1 ):
-		variable = user.objects.all()
-	        context = {'variable':variable}
-       		return render(request, 'bookmarks/new_user.html',context)
+	try:
+		uname = request.POST['username']
+		email = request.POST['emailid']
+		passwrd = request.POST['password']
+		passwrd1 = request.POST['password1']
+		al = user.objects.get(username = uname)
+		if(al.username == uname):
+			error_msg = 'Username already exist Choose another please'
+			context = {'error_msg':error_msg}
+	       		return render(request, 'bookmarks/new_user.html',context)
 
-	else:
-		q = user(username = uname, emailid = email, password = passwrd) 
-		q.save()
+		if(passwrd != passwrd1 ):
+			error_msg = 'Password does not match'
+		        context = {'error_msg':error_msg}
+	       		return render(request, 'bookmarks/new_user.html',context)
+	
+		else:
+			q = user(username = uname, emailid = email, password = passwrd) 
+			q.save()
+			return HttpResponseRedirect(reverse('bookmarks:login'))
+
+	except:
 		return HttpResponseRedirect(reverse('bookmarks:login'))
 def welcome(request):
 	q = user.objects.get(username = request.POST['username'])
