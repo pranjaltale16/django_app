@@ -53,8 +53,8 @@ def welcome(request):
 		context = {'q':q}
 		return render(request,'bookmarks/welcome.html',context)
 	else:
-		variable = user.objects.all()
-		context = {'variable': variable}
+		error_msg = "Sorry details does not match please try again"
+		context = {'error_msg': error_msg}
 		return HttpResponseRedirect(reverse('bookmarks:login'))
 def passwordupdate(request):
 	return render(request,'bookmarks/passwordupdate.html')

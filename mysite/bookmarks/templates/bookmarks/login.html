@@ -2,6 +2,9 @@
 <h4> Welcome to our new <i> bookmarking </i> portal </h4>
 <hr>
 <form action = {% url 'bookmarks:welcome' %} method = "post">
+{% if error_msg %}
+	<p>error_msg </p>
+{% endif %}
 {% csrf_token %}
 	Username:<input type = "text" name = 'username' id = 'a'  required><br><br>
 	Password:<input type = "password" name = 'password' id = 'b' required><br><br>
