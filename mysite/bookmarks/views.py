@@ -42,6 +42,11 @@ def authenticate(request):
 	except:
 		return HttpResponseRedirect(reverse('bookmarks:login'))
 def welcome(request):
+	if "username" in request.session:
+		q = user.objects.get(username = request.session['username'])
+		context = {'q':q}
+		return render(request,'bookmarks/welcome.html',context)
+
 	q = user.objects.get(username = request.POST['username'])
 	if(q.password == request.POST['password']):
 		request.session['username'] = q.username
