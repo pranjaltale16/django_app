@@ -1,6 +1,3 @@
-{% load staticfiles %}
-<link rel = 'stylesheet' type = "text/css" href ="{% static style.css %}"
-<script  type = "text/javascript" src = {% static "asd.js" %}></script>
 <h3> HELLO </h3>
 <h4> Welcome to our new <i> bookmarking </i> portal </h4>
 <hr>
@@ -8,7 +5,7 @@
 {% if error_msg %}
 	<p>{{error_msg}}</p>
 {% endif %}
-<form action = {% url 'bookmarks:authenticate'%} method = "post">
+<form action = {% url 'bookmarks:authenticate' %} method = "post">
 {% csrf_token %}
 	Username:<input type = "text" name = "username" required ><br><br>
 	emailID: <input type = "email" name = "emailid" required ><br><br>
@@ -17,4 +14,3 @@
 	<p id = 't'></p>
 <input type = 'submit' value = "SignUp" >
 </form>
-<button onclick = "check()" >Yo</button>

@@ -18,44 +18,50 @@ def newuser(request):
 	context = {'variable':variable}
 	return render(request, 'bookmarks/new_user.html',context)
 def authenticate(request):
+	uname = request.POST['username']
+	email = request.POST['emailid']
+	passwrd = request.POST['password']
+	passwrd1 = request.POST['password1']
 	try:
-		uname = request.POST['username']
-		email = request.POST['emailid']
-		passwrd = request.POST['password']
-		passwrd1 = request.POST['password1']
-		al = user.objects.get(username = uname)
-		if(al.username == uname):
+		if user.objects.get(username = request.POST['username']):
 			error_msg = 'Username already exist Choose another please'
 			context = {'error_msg':error_msg}
-	       		return render(request, 'bookmarks/new_user.html',context)
+       			return render(request, 'bookmarks/new_user.html',context)
 
+	except:
 		if(passwrd != passwrd1 ):
 			error_msg = 'Password does not match'
 		        context = {'error_msg':error_msg}
-	       		return render(request, 'bookmarks/new_user.html',context)
+       			return render(request, 'bookmarks/new_user.html',context)
 	
 		else:
 			q = user(username = uname, emailid = email, password = passwrd) 
 			q.save()
 			return HttpResponseRedirect(reverse('bookmarks:login'))
 
-	except:
-		return HttpResponseRedirect(reverse('bookmarks:login'))
+
+		
 def welcome(request):
 	if "username" in request.session:
 		q = user.objects.get(username = request.session['username'])
 		context = {'q':q}
 		return render(request,'bookmarks/welcome.html',context)
 
-	q = user.objects.get(username = request.POST['username'])
-	if(q.password == request.POST['password']):
-		request.session['username'] = q.username
-		context = {'q':q}
-		return render(request,'bookmarks/welcome.html',context)
-	else:
+	try:
+		q = user.objects.get(username = request.POST['username'])
+		if(q.password == request.POST['password']):
+			request.session['username'] = q.username
+			context = {'q':q}
+			return render(request,'bookmarks/welcome.html',context)
+		else:	
+			error_msg = "Sorry password does not match please try again"
+			context = {'error_msg': error_msg}
+			return render(request, 'bookmarks/login.html',context)
+	
+	except:
 		error_msg = "Sorry details does not match please try again"
 		context = {'error_msg': error_msg}
-		return HttpResponseRedirect(reverse('bookmarks:login'))
+		return render(request, 'bookmarks/login.html',context)
 def passwordupdate(request):
 	return render(request,'bookmarks/passwordupdate.html')
 def changepassword(request):
