@@ -1,16 +1,19 @@
+{% load staticfiles%}
+<script src = "{% static 'bookmarks/angular.min.js' %}" ></script>
+<div ng-app = "">
 <h3> HELLO </h3>
-<h4> Welcome to our new <i> bookmarking </i> portal </h4>
+<h4> Welcome <u><i><span ng-bind = "yo"></span></i></u> to our new <i> bookmarking </i> portal </h4>
 <hr>
-
 {% if error_msg %}
 	<p>{{error_msg}}</p>
 {% endif %}
 <form action = {% url 'bookmarks:authenticate' %} method = "post">
 {% csrf_token %}
-	Username:<input type = "text" name = "username" required ><br><br>
+	Username:<input type = "text" name = "username" required ng-model = "yo" ><br><br>
 	emailID: <input type = "email" name = "emailid" required ><br><br>
 	Password:<input type = "password" name = "password" id = 'p1' required ><br><br>
 	Re-enter:<input type = "password" name = "password1" id = 'p2' required ><br><br>
 	<p id = 't'></p>
 <input type = 'submit' value = "SignUp" >
 </form>
+</div>
