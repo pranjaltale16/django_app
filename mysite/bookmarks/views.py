@@ -74,6 +74,7 @@ def changepassword(request):
 		if(newpass == newpass1):
 			q.password = newpass
 			q.save()
+			del request.session['username']
 			return render(request,'bookmarks/index.html')
 	else:
 		return HttpResponse("Details does not match")
