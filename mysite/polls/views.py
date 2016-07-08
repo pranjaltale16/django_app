@@ -24,7 +24,7 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
 	try:
-		if request.session[question_id] :
+		if request.session[question_id]:
 			q = "you have already voted for that question"
 			context = {'q':q }
 			return render(request,'polls/voted.html',context)
